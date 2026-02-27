@@ -44,24 +44,6 @@ class HandShapeFeatureExtractor:
             print(str(e))
             raise
 
-    # calculating dimensions for the cropping the specific hand parts
-    # Need to change constant 80 based on the video dimensions
-    @staticmethod
-    def __bound_box(x, y, max_y, max_x):
-        y1 = y + 80
-        y2 = y - 80
-        x1 = x + 80
-        x2 = x - 80
-        if max_y < y1:
-            y1 = max_y
-        if y - 80 < 0:
-            y2 = 0
-        if x + 80 > max_x:
-            x1 = max_x
-        if x - 80 < 0:
-            x2 = 0
-        return y1, y2, x1, x2
-
     def extract_feature(self, image):
         try:
             img_arr = self.__pre_process_input_image(image)
