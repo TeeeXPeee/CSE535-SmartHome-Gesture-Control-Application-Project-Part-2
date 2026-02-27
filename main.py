@@ -11,35 +11,24 @@ import tensorflow as tf
 
 ## import the handfeature extractor class
 from handshape_feature_extractor import HandShapeFeatureExtractor
+import frameextractor
+
+def generate_middle_frames(video_path_dir, frame_save_dir):
+    for count, video in enumerate(os.listdir(video_path_dir)):
+        print(video)
+        video_path = os.path.join(video_path_dir, video)
+        frameextractor.frameExtractor(video_path, frame_save_dir, count)
 
 # =============================================================================
 # Get the penultimate layer for trainig data
 # =============================================================================
 # your code goes here
 # Extract the middle frame of each gesture video
-def extract_features(video_path):
-    try:
-        cap = cv2.VideoCapture(video_path)
-        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        middle_frame = total_frames // 2
-        cap.set(cv2.CAP_PROP_POS_FRAMES, middle_frame)
-        ret, frame = cap.read()
-        if not ret:
-            raise Exception("Could not read the frame from video.")
-        cap.release()
-        
-        # Preprocess the frame and extract features using the model
-        extractor = HandShapeFeatureExtractor.get_instance()
-        preprocessed_frame = extractor._HandShapeFeatureExtractor__pre_process_input_image(frame)
-        features = extractor.model.predict(preprocessed_frame)
-        return features
-    except Exception as e:
-        print(str(e))
-        raise
 
-for video_file in os.listdir(os.path.join('traindata')):
-    video_path = os.path.join('traindata', video_file)
-    print(extract_features(video_path))
+generate_middle_frames('traindata', 'trainframes')
+
+
+
     # Store or use the extracted features as needed
 # =============================================================================
 # Get the penultimate layer for test data
