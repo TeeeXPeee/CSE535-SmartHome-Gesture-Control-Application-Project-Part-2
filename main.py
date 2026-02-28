@@ -53,7 +53,6 @@ def extract_features_from_frames(frame_dir, feature_extrator):
         feature_vec = feature.squeeze()
         feature_vec = feature_vec / np.linalg.norm(feature_vec) if np.linalg.norm(feature_vec) > 0 else feature_vec
         features[filename] = feature_vec
-        print(f"Extracted features from {filename}")
     return features
 
 
@@ -102,7 +101,6 @@ def find_closest_gesture(test_dict, train_dict, train_frames):
             train = train / np.linalg.norm(train) if np.linalg.norm(train) > 0 else train
 
             score = cosine_similarity(test, train)
-            print(f"Similarity with {filename}: {score:.4f}")
 
             if score > max_similarity:
                 max_similarity = score

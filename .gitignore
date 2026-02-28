@@ -1,3 +1,5 @@
 /train_frames
 /__pycache__
-
+/test
+/testframes
+/trainframes
