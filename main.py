@@ -111,6 +111,6 @@ def find_closest_gesture(test_dict, train_dict, train_frames):
     return result
 
 recognized_gestures = find_closest_gesture(test_features, train_features, train_frames)
-with open('results.csv', 'w') as f:
+with open('Results.csv', 'w') as f:
     for gesture in recognized_gestures:
         f.write(f"{gesture}\n")
